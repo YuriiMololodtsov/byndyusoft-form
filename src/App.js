@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { quickSort } from './helper';
 
 function App() {
+  const [value, setValue] = useState();
+  const [result, setResult] = useState();
+
+  function setVal(e) {
+    let value;
+    value = e.target.value
+      .replace(/[^0-9,-]/g, '')
+      .replace(/,,/g, ',')
+      .replace(/-,/g, ',')
+      .replace(/--/, '-');
+    if (value[0] === ',') {
+      value = value.substr(1, value.length);
+    }
+    setValue(value);
+  }
+
+  function addArr(value) {
+    let arr = value.split(',');
+    arr = arr.map(parseFloat);
+    arr = quickSort(arr, 0, arr.length - 1)
+      .slice(0, 2)
+      .reduce((a, b) => a + b);
+    return arr;
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input value={value} onChange={setVal}></input>
+      <button onClick={() => setResult(addArr(value))}>Click</button>
+      <p>{result}</p>
     </div>
   );
 }
