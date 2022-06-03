@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
-import { sumOfTwoMinElenents } from './helper';
+// import { sumOfTwoMinElenents } from './helper';
+const sumOfTwoMinElenents = require('./helper');
 
 function App() {
   const [value, setValue] = useState();
