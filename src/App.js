@@ -16,21 +16,42 @@ function App() {
     if (value[0] === ',') {
       value = value.substr(1, value.length);
     }
+
     setValue(value);
   }
 
-  function addArr(value) {
-    let arr = value.split(',');
-    arr = arr.map(parseFloat);
-    arr = quickSort(arr, 0, arr.length - 1)
-      .slice(0, 2)
-      .reduce((a, b) => a + b);
+  function strToArrNums(str) {
+    let arr;
+    console.log(str);
+    if (str === undefined) {
+      arr = [];
+    } else {
+      arr = str.split(',').map(parseFloat);
+    }
+    arr = sumOfTwoMinElenents(arr);
+
     return arr;
+  }
+
+  function sumOfTwoMinElenents(arr) {
+    if (
+      arr.length == 0 ||
+      !Array.isArray(arr) ||
+      arr.every((e) => typeof e === 'number')
+    ) {
+      return 'Введите корректные данные';
+    } else {
+      arr = quickSort(arr, 0, arr.length - 1)
+        .slice(0, 2)
+        .reduce((a, b) => a + b);
+      console.log(arr);
+      return arr;
+    }
   }
   return (
     <div className="App">
       <input value={value} onChange={setVal}></input>
-      <button onClick={() => setResult(addArr(value))}>Click</button>
+      <button onClick={() => setResult(strToArrNums(value))}>Click</button>
       <p>{result}</p>
     </div>
   );
