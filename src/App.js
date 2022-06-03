@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import { quickSort } from './helper';
+import { sumOfTwoMinElenents } from './helper';
 
 function App() {
   const [value, setValue] = useState();
@@ -22,32 +22,18 @@ function App() {
 
   function strToArrNums(str) {
     let arr;
-    console.log(str);
+
     if (str === undefined) {
       arr = [];
     } else {
+      console.log(typeof str);
       arr = str.split(',').map(parseFloat);
-    }
-    arr = sumOfTwoMinElenents(arr);
-
-    return arr;
-  }
-
-  function sumOfTwoMinElenents(arr) {
-    if (
-      arr.length == 0 ||
-      !Array.isArray(arr) ||
-      arr.every((e) => typeof e === 'number')
-    ) {
-      return 'Введите корректные данные';
-    } else {
-      arr = quickSort(arr, 0, arr.length - 1)
-        .slice(0, 2)
-        .reduce((a, b) => a + b);
       console.log(arr);
-      return arr;
     }
+
+    return sumOfTwoMinElenents(arr);
   }
+
   return (
     <div className="App">
       <input value={value} onChange={setVal}></input>

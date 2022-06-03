@@ -28,7 +28,7 @@ function partition(items, left, right) {
   return i;
 }
 
-export function quickSort(items, left, right) {
+function quickSort(items, left, right) {
   let index;
 
   if (items.length > 1) {
@@ -46,4 +46,15 @@ export function quickSort(items, left, right) {
   }
 
   return items; //return the sorted array
+}
+
+export function sumOfTwoMinElenents(arr) {
+  if (arr.length === 0 || !Array.isArray(arr) || arr.every((e) => isNaN(e))) {
+    return 'Введите корректные данные';
+  } else {
+    arr = quickSort(arr, 0, arr.length - 1)
+      .slice(0, 2)
+      .reduce((a, b) => a + b);
+    return arr;
+  }
 }
