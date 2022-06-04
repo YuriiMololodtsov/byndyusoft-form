@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './App.css';
-// import { sumOfTwoMinElenents } from './helper';
 const sumOfTwoMinElenents = require('./helper');
 
 function App() {
@@ -8,8 +7,7 @@ function App() {
   const [result, setResult] = useState();
 
   function setVal(e) {
-    let value;
-    value = e.target.value
+    let value = e.target.value
       .replace(/[^0-9,-]/g, '')
       .replace(/,,/g, ',')
       .replace(/-,/g, ',')
@@ -24,12 +22,10 @@ function App() {
   function strToArrNums(str) {
     let arr;
 
-    if (str === undefined) {
-      arr = [];
-    } else {
-      console.log(typeof str);
+    if (str !== undefined) {
       arr = str.split(',').map(parseFloat);
-      console.log(arr);
+    } else {
+      arr = [];
     }
 
     return sumOfTwoMinElenents(arr);
@@ -37,7 +33,7 @@ function App() {
 
   return (
     <div className="App">
-      <input value={value} onChange={setVal}></input>
+      <input value={value} onChange={setVal} />
       <button onClick={() => setResult(strToArrNums(value))}>Click</button>
       <p>{result}</p>
     </div>
